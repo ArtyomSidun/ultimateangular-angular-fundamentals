@@ -8,7 +8,7 @@ import { IPassenger } from "../interfaces/passenger.interface";
       Airline Passengers
       <div>
         Total checked in passengers: {{ checkedIPassengers() }}/{{
-          items.length
+          items?.length || 0
         }}
       </div>
     </div>
@@ -19,7 +19,7 @@ export class PassengerCountComponent {
   items: IPassenger[];
 
   checkedIPassengers() {
-    if (!this.items.length) return;
+    if (!this.items || !this.items.length) return 0;
     return this.items.filter((passenger: IPassenger) => {
       return passenger.checkedIn;
     }).length;

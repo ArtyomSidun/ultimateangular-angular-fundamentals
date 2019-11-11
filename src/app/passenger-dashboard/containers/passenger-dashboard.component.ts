@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { PassengerDashboardService } from '../passenger-dashboard.service'
 import { IPassenger } from "../interfaces/passenger.interface";
 
 @Component({
@@ -10,65 +11,30 @@ export class PassengerDashboardComponent implements OnInit {
   title = "ultimateangular-angular-fundamentals";
   passengers: IPassenger[];
 
-  ngOnInit() {
-    this.passengers = [
-      {
-        id: 1,
-        fullname: "Stephen",
-        checkedIn: true,
-        checkInDate: 1490742000000,
-        children: null
-      },
-      {
-        id: 2,
-        fullname: "Roon",
-        checkedIn: true,
-        checkInDate: 1490742000000,
-        children: [
-          {
-            name: "Taras",
-            age: 38
-          },
-          {
-            name: "Bobic",
-            age: 97
-          }
-        ]
-      },
-      {
-        id: 3,
-        fullname: "Thomas",
-        checkedIn: false,
-        checkInDate: 1490742000000,
-        children: null
-      },
-      {
-        id: 4,
-        fullname: "Diego",
-        checkedIn: false,
-        checkInDate: null,
-        children: [
-          {
-            name: "Dony",
-            age: 7
-          }
-        ]
-      },
-      {
-        id: 4,
-        fullname: "Dodo",
-        checkedIn: true,
-        checkInDate: null,
-        children: null
-      }
-    ];
+  constructor(private passengerService: PassengerDashboardService) { }
+
+  ngOnInit () {
+    this.passengerService.getPassengers()
+      .subscribe((data: IPassenger[]) => {
+        this.passengers = data
+      })
   }
 
-  handelEdit(event) {
-    console.log(event);
+  handelEdit (event: IPassenger) {
+    this.passengerService.updatePassenger(event)
+      .subscribe((data: IPassenger) => {
+        this.passengers = this.passengers.filter((passenger: IPassenger) => {
+          if (passenger.id === data.id) {
+            passenger = Object.assign(passenger, data)
+          }
+          return passenger
+        })
+      })
   }
 
-  handelRemove(event) {
-    console.log(event);
+  handelRemove (event: IPassenger) {
+    this.passengers = this.passengers.filter((passenger: IPassenger) => {
+      return passenger.id !== event.id
+    })
   }
 }

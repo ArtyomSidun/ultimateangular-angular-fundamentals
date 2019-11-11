@@ -1,0 +1,53 @@
+{
+  "passengers": [
+    {
+      "id": 1,
+      "fullname": "Stephen123",
+      "checkedIn": true,
+      "checkInDate": 1490742000000,
+      "children": null
+    },
+    {
+      "id": 2,
+      "fullname": "Roon123",
+      "checkedIn": true,
+      "checkInDate": 1490742000000,
+      "children": [
+        {
+          "name": "Taras",
+          "age": 38
+        },
+        {
+          "name": "Bobic",
+          "age": 97
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "fullname": "Thomas",
+      "checkedIn": false,
+      "checkInDate": 1490742000000,
+      "children": null
+    },
+    {
+      "id": 4,
+      "fullname": "Diego123",
+      "checkedIn": false,
+      "checkInDate": null,
+      "children": [
+        {
+          "name": "Dony",
+          "age": 7
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "fullname": "Dodo",
+      "checkedIn": true,
+      "checkInDate": null,
+      "children": null
+    }
+  ]
+}
