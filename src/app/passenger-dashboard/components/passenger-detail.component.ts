@@ -29,7 +29,6 @@ import { IPassenger } from "../interfaces/passenger.interface";
             : "Not checked in"
         }}
       </div>
-      <div class="childern">Childern: {{ detail.children?.length || 0 }}</div>
       <button (click)="toggleEditing()">
         {{ editing ? "Done" : "Edit" }}
       </button>
