@@ -7,7 +7,10 @@ import { IPassenger } from "../../interfaces/passenger.interface";
   styleUrls: [],
   template: `
     <div>
-      <passenger-form [detail]="passenger"></passenger-form>
+      <passenger-form
+        [detail]="passenger"
+        (update)="onPassengerUpdate($event)"
+      ></passenger-form>
     </div>
   `
 })
@@ -18,5 +21,12 @@ export class PassengerViwerComponent implements OnInit {
     this.passengerService.getPassenger("1").subscribe((data: IPassenger) => {
       this.passenger = data;
     });
+  }
+  onPassengerUpdate(event: IPassenger) {
+    this.passengerService
+      .updatePassenger(event)
+      .subscribe((data: IPassenger) => {
+        this.passenger = Object.assign({}, data);
+      });
   }
 }

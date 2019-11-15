@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { IPassenger } from "../../interfaces/passenger.interface";
 import { IBaggage } from "../../interfaces/baggage.interface";
 
@@ -10,6 +10,7 @@ import { IBaggage } from "../../interfaces/baggage.interface";
 export class PassengerFormComponent {
   @Input()
   detail: IPassenger;
+
   baggage: IBaggage[] = [
     {
       key: "none",
@@ -28,9 +29,19 @@ export class PassengerFormComponent {
       value: "Hand and hold baggage"
     }
   ];
+
+  @Output()
+  update: EventEmitter<IPassenger> = new EventEmitter<IPassenger>();
+
   toggleCheckIn($event: boolean) {
     if ($event) {
       this.detail.checkInDate = Date.now();
+    }
+  }
+
+  handleSubmit(passenger: IPassenger, isValid: boolean) {
+    if (isValid) {
+      this.update.emit(passenger);
     }
   }
 }
