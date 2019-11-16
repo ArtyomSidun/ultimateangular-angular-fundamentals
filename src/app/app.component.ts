@@ -1,10 +1,22 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+import { INav } from "./passenger-dashboard/interfaces/nav.interface";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-  title: string = '<i>Edutcation angular</i>';
+  nav: INav[] = [
+    {
+      link: "/",
+      name: "Home",
+      exact: true
+    },
+    {
+      link: "/passengers",
+      name: "Passengers",
+      exact: false
+    }
+  ];
 }

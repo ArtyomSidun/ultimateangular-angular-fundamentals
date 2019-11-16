@@ -10,11 +10,11 @@ export class PassengerDashboardService {
   constructor(private http: HttpClient) {}
 
   getPassengers(): Observable<IPassenger[]> {
-    return this.http.get<IPassenger[]>(PASSENGER_API)
+    return this.http.get<IPassenger[]>(PASSENGER_API);
   }
 
-  getPassenger(id: string): Observable<IPassenger> {
-    return this.http.get<IPassenger>(`${PASSENGER_API}/${id}`)
+  getPassenger(id: number): Observable<IPassenger> {
+    return this.http.get<IPassenger>(`${PASSENGER_API}/${id}`);
   }
 
   updatePassenger(passenger: IPassenger): Observable<IPassenger> {

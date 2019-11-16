@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { PassengerDashboardService } from "../passenger-dashboard.service";
 import { IPassenger } from "../interfaces/passenger.interface";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "passenger-dashboard",
@@ -11,7 +12,10 @@ export class PassengerDashboardComponent implements OnInit {
   title = "ultimateangular-angular-fundamentals";
   passengers: IPassenger[];
 
-  constructor(private passengerService: PassengerDashboardService) {}
+  constructor(
+    private passengerService: PassengerDashboardService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.passengerService.getPassengers().subscribe((data: IPassenger[]) => {
@@ -43,5 +47,9 @@ export class PassengerDashboardComponent implements OnInit {
           return passenger.id !== data.id;
         });
       });
+  }
+
+  handelView(event: IPassenger) {
+    this.router.navigate(["/passengers", event.id]);
   }
 }
